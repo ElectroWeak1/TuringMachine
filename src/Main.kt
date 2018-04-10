@@ -1,43 +1,39 @@
-val code = """
-[q0,b][q0,b,R]
-[q0,c][q0,c,R]
-[q0,x][q0,x,R]
-[q0,a][qsa,x,L]
-[qsa,a][qsa,a,L]
-[qsa,b][qsa,b,L]
-[qsa,c][qsa,c,L]
-[qsa,x][qsa,x,L]
-[qsa,B][qhb,B,R]
-[qhb,a][qhb,a,R]
-[qhb,c][qhb,c,R]
-[qhb,x][qhb,x,R]
-[qhb,b][qsb,x,L]
-[qsb,a][qsb,a,L]
-[qsb,b][qsb,b,L]
-[qsb,c][qsb,c,L]
-[qsb,x][qsb,x,L]
-[qsb,B][qhc,B,R]
-[qhc,a][qhc,a,R]
-[qhc,b][qhc,b,R]
-[qhc,x][qhc,x,R]
-[qhc,c][qsc,x,L]
-[qsc,a][qsc,a,L]
-[qsc,b][qsc,b,L]
-[qsc,c][qsc,c,L]
-[qsc,x][qsc,x,L]
-[qsc,B][q0,B,R]
-[q0,B][qf,B,S]
-""".trimIndent()
-
-var input = "aababaabbbabcccccc"
+import java.nio.file.Path
+import java.nio.file.Paths
 
 fun main(args: Array<String>) {
+    var file: Path? = null
+    var input: String? = null
+    var startState = "q0"
+    var finalState = "qf"
+
+    if (args.size in 4..8) {
+        args.forEachIndexed { index, arg ->
+            when (arg) {
+                "-f" -> file = Paths.get(args[index + 1])
+                "-i" -> input = args[index + 1]
+                "-s" -> startState = args[index + 1]
+                "-e" -> finalState = args[index + 1]
+            }
+        }
+    } else {
+        System.err.println("Not enough parameters")
+        return
+    }
+
+    if (file == null) {
+        System.err.println("No input rules specified")
+        return
+    } else if (input == null) {
+        System.err.println("No input specified")
+        return
+    }
+
+    val tape = Tape(input!!)
     val parser = Parser()
+    val rules = parser.parseCode(file!!)
 
-    val tape = Tape(input)
-    val rules = parser.parseCode(code)
-
-    val sim = Simulation(tape, rules)
+    val sim = Simulation(tape, rules, startState, finalState)
 
     tape.print()
     while (sim.canStep()) {

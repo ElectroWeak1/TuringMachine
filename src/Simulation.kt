@@ -1,6 +1,6 @@
-class Simulation(val tape: Tape, val rules: Rules) {
+class Simulation(val tape: Tape, val rules: Rules, val firstState: String = "q0", val finalState: String = "qf") {
 
-    private var currentState = "q0"
+    private var currentState = firstState
 
     fun canStep(): Boolean {
         try {
@@ -8,10 +8,10 @@ class Simulation(val tape: Tape, val rules: Rules) {
         } catch (ex: NoRuleException) {
             return false;
         }
-        return currentState != "qf"
+        return currentState != finalState
     }
 
-    fun isInFinalState() = currentState == "qf"
+    fun isInFinalState() = currentState == finalState
 
     fun step() {
         val rule = rules.findRule(currentState, tape.getChar())
