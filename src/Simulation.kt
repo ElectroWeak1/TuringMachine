@@ -1,4 +1,7 @@
-class Simulation(val tape: Tape, val rules: Rules, val firstState: String = "q0", val finalState: String = "qf") {
+class Simulation(private val tape: Tape,
+                 private val rules: Rules,
+                 firstState: String = "q0",
+                 private val finalState: String = "qf") {
 
     private var currentState = firstState
 

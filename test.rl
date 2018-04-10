@@ -7,7 +7,7 @@
 [qsa,b][qsa,b,L]
 [qsa,c][qsa,c,L]
 [qsa,x][qsa,x,L]
-[qsa,B][qhb,B,R]
+[qsa,#][qhb,#,R]
 
 [qhb,a][qhb,a,R]
 [qhb,c][qhb,c,R]
@@ -18,7 +18,7 @@
 [qsb,b][qsb,b,L]
 [qsb,c][qsb,c,L]
 [qsb,x][qsb,x,L]
-[qsb,B][qhc,B,R]
+[qsb,#][qhc,#,R]
 
 [qhc,a][qhc,a,R]
 [qhc,b][qhc,b,R]
@@ -29,6 +29,6 @@
 [qsc,b][qsc,b,L]
 [qsc,c][qsc,c,L]
 [qsc,x][qsc,x,L]
-[qsc,B][q0,B,R]
+[qsc,#][q0,#,R]
 
-[q0,B][qf,B,S]
+[q0,#][qf,#,S]
