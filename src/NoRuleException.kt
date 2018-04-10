@@ -1,0 +1,1 @@
+class NoRuleException(message: String) : RuntimeException(message)
