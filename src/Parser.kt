@@ -25,7 +25,12 @@ class Parser {
                 val (fromState, fromChar) = from.value.substring(1, from.value.length - 1).split(",")
                 val (toState, toChar, movement) = to.value.substring(1, to.value.length - 1).split(",")
 
-                rules.add(Rule(fromState, fromChar.first(), toState, toChar.first(), movement.first()))
+                try {
+                    rules.add(Rule(fromState, fromChar.first(), toState, toChar.first(), movement.first()))
+                } catch (ex: UndeterministicRuleException) {
+                    System.err.println("Cannot define same rule")
+                    System.exit(1)
+                }
             }
         }
 

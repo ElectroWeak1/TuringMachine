@@ -1,0 +1,1 @@
+class UndeterministicRuleException(message: String) : RuntimeException(message)
